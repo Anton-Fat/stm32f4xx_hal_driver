@@ -472,7 +472,9 @@ extern "C" {
 #define TYPEPROGRAMDATA_FASTBYTE      FLASH_TYPEPROGRAMDATA_FASTBYTE
 #define TYPEPROGRAMDATA_FASTHALFWORD  FLASH_TYPEPROGRAMDATA_FASTHALFWORD
 #define TYPEPROGRAMDATA_FASTWORD      FLASH_TYPEPROGRAMDATA_FASTWORD
+#if !defined(STM32F2) && !defined(STM32F4) && !defined(STM32F7) && !defined(STM32H7)
 #define PAGESIZE                      FLASH_PAGE_SIZE
+#endif /* STM32F2 && STM32F4 && STM32F7 &&  STM32H7 */
 #define TYPEPROGRAM_FASTBYTE          FLASH_TYPEPROGRAM_BYTE
 #define TYPEPROGRAM_FASTHALFWORD      FLASH_TYPEPROGRAM_HALFWORD
 #define TYPEPROGRAM_FASTWORD          FLASH_TYPEPROGRAM_WORD
@@ -806,6 +808,21 @@ extern "C" {
 #define GPIO_AF0_S2DSTOP                          GPIO_AF0_SRDSTOP
 #define GPIO_AF11_LPGPIO                          GPIO_AF11_LPGPIO1
 #endif /* STM32U5 */
+
+#if defined(STM32WBA)
+#define GPIO_AF11_RF_ANTSW0    GPIO_AF11_RF
+#define GPIO_AF11_RF_ANTSW1    GPIO_AF11_RF
+#define GPIO_AF11_RF_ANTSW2    GPIO_AF11_RF
+#define GPIO_AF11_RF_IO1       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO2       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO3       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO4       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO5       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO6       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO7       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO8       GPIO_AF11_RF
+#define GPIO_AF11_RF_IO9       GPIO_AF11_RF
+#endif /* STM32WBA */
 /**
   * @}
   */
@@ -3664,8 +3681,8 @@ extern "C" {
 #define RCC_SYSCLKSOURCE_STATUS_PLLR   RCC_SYSCLKSOURCE_STATUS_PLLCLK
 #endif
 
-#if   defined(STM32L4) || defined(STM32WB) || defined(STM32G0) || defined(STM32G4) || defined(STM32L5) || \
-      defined(STM32WL) || defined(STM32C0) || defined(STM32H7RS) || defined(STM32U0)
+#if defined(STM32L4) || defined(STM32WB) || defined(STM32G0) || defined(STM32G4) || defined(STM32L5) || \
+    defined(STM32WL) || defined(STM32C0) || defined(STM32H7RS) || defined(STM32U0)
 #define RCC_RTCCLKSOURCE_NO_CLK     RCC_RTCCLKSOURCE_NONE
 #else
 #define RCC_RTCCLKSOURCE_NONE       RCC_RTCCLKSOURCE_NO_CLK
@@ -3916,7 +3933,8 @@ extern "C" {
   */
 #if defined (STM32G0) || defined (STM32L5) || defined (STM32L412xx) || defined (STM32L422xx) || \
     defined (STM32L4P5xx)|| defined (STM32L4Q5xx) || defined (STM32G4) || defined (STM32WL) || defined (STM32U5) || \
-    defined (STM32WBA) || defined (STM32H5) || defined (STM32C0) || defined (STM32H7RS) ||  defined (STM32U0)
+    defined (STM32WBA) || defined (STM32H5) || \
+    defined (STM32C0) || defined (STM32H7RS) ||  defined (STM32U0)
 #else
 #define __HAL_RTC_CLEAR_FLAG                      __HAL_RTC_EXTI_CLEAR_FLAG
 #endif
