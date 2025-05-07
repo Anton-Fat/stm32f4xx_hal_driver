@@ -2177,6 +2177,12 @@ static HAL_StatusTypeDef PCD_EP_OutSetupPacket_int(PCD_HandleTypeDef *hpcd, uint
 #endif /* defined (USB_OTG_FS) */
 
 #if defined (USB)
+
+HAL_StatusTypeDef COS_PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
+{
+  return PCD_EP_ISR_Handler(hpcd);
+}
+
 /**
   * @brief  This function handles PCD Endpoint interrupt request.
   * @param  hpcd PCD handle
